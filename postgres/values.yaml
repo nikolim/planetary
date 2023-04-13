@@ -1,0 +1,32 @@
+primary:
+  resources:
+    limits:
+      memory: 512Mi
+      cpu: 500m
+    requests:
+      memory: 256Mi
+      cpu: 250m
+
+  persistence:
+    enabled: true
+    size: 8Gi
+    storageClass: "encrypted-standard"
+    accessModes:
+      - ReadWriteOnce
+    existingClaim: "data-postgres-postgresql-0"
+
+  initdb:
+    scriptsConfigMap: postgres-init-scripts
+
+  extraVolumes:
+    - name: conf
+      emptyDir:
+        sizeLimit: 10Mi
+    - name: tmp
+      emptyDir:
+        sizeLimit: 10Mi
+  extraVolumeMounts:
+    - name: conf
+      mountPath: /opt/bitnami/postgresql/conf
+    - name: tmp
+      mountPath: /opt/bitnami/postgresql/tmp

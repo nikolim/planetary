@@ -1,0 +1,31 @@
+name: Deploy Postgres via Helm
+
+on:
+  push:
+    branches: [ 'deployment' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to EKS
+    runs-on: [ Linux ]
+    container: alpine/k8s:1.24.12
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Add helm repo
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+
+      - name: Create config map with init script
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" >> kubeconfig.yaml
+          kubectl create configmap postgres-init-scripts --from-file=postgres/init.sql --namespace alm-energymonitor --kubeconfig=kubeconfig.yaml --dry-run=client -o yaml | kubectl apply --kubeconfig=kubeconfig.yaml -f - 
+
+      - name: Deploy helm chart to kubernetes cluster
+        run: |
+          helm upgrade --install --kubeconfig=kubeconfig.yaml postgres bitnami/postgresql --namespace alm-energymonitor -f postgres/values.yaml
