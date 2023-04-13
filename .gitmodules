@@ -1,0 +1,9 @@
+[submodule "log_analyser"]
+	path = log_analyser
+	url = git@github.siemens.cloud:nikolai-limbrunner-ext/log_analyser.git
+[submodule "energy_calculator"]
+	path = energy_calculator
+	url = git@github.siemens.cloud:nikolai-limbrunner-ext/energy_calculator.git
+[submodule "pollect"]
+	path = pollect
+	url = git@github.siemens.cloud:nikolai-limbrunner-ext/pollect.git
