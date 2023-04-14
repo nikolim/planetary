@@ -4,3 +4,6 @@
 [submodule "energy_calculator"]
 	path = energy_calculator
 	url = git@github.siemens.cloud:nikolai-limbrunner-ext/energy_calculator.git
+[submodule "pollect"]
+	path = pollect
+	url = git@github.siemens.cloud:nikolai-limbrunner-ext/pollect.git
