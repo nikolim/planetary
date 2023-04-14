@@ -7,6 +7,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  http_proxy: "http://de.coia.siemens.net:9400"
+  no_proxy: "siemens.com,siemens.io,github.siemens.cloud,github-qa.siemens.cloud"
+
 jobs:
   push_to_registry:
     name: Push Docker image to Artifactory
@@ -38,6 +42,10 @@ jobs:
           push: true
           tags: |
             falcon.rtf-alm.siemens.cloud/planetary-dev/log_analyser:${{ env.LOG_ANALYSER_VERSION }}
+          build-args: |
+            "http_proxy=${{ env.http_proxy }}"
+            "https_proxy=${{ env.http_proxy }}"
+            "no_proxy=${{ env.no_proxy }}"
 
       # Publish the energy_calculator image
       - name: Extract energy_calculator version
@@ -51,3 +59,8 @@ jobs:
           push: true
           tags: |
             falcon.rtf-alm.siemens.cloud/planetary-dev/energy_calculator:${{ env.ENERGY_CALCULATOR_VERSION }}
+          build-args: |
+            "http_proxy=${{ env.http_proxy }}"
+            "https_proxy=${{ env.http_proxy }}"
+            "no_proxy=${{ env.no_proxy }}"
+
