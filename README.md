@@ -8,13 +8,12 @@
 ## Components 
 The components are added are submodules to this repository.
 ```bash
-git clone --recursive https://github.siemens.cloud/nikolai-limbrunner-ext/planetary.git
+git clone --recursive git@github.siemens.cloud:ALM/planetary.git
 ```
 Or if you already cloned the repository, you can run the following command to initialize the submodules:
 ```bash
 git submodule update --init --recursive
 ```
-
 
 ## K8s deployment
 
