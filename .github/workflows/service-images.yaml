@@ -17,6 +17,7 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.PAT_TOKEN }}
+          lfs: true
 
       - name: Login to Binary Management Docker
         uses: actions/docker_login-action@v2
