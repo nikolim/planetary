@@ -1,0 +1,52 @@
+name: Publish Docker images to Artifactory
+
+on:
+  push:
+    branches: [ 'main' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Artifactory
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Login to Binary Management Docker
+        uses: actions/docker_login-action@v2
+        with:
+          registry: falcon.rtf-alm.siemens.cloud
+          username: ${{ secrets.ARTIFACTORY_USERNAME }}
+          password: ${{ secrets.ARTIFACTORY_TOKEN }}
+
+      # Publish the log_analyser image
+      - name: Extract log_analyser version
+        run: echo "LOG_ANALYSER_VERSION=$(python3 log_analyser/setup.py --version)" >> $GITHUB_ENV
+
+      - name: Build and push Docker images
+        uses: actions/docker_build-push-action@v4.0.0
+        with:
+          context: ./log_analyser
+          dockerfile: ./log_analyser/Dockerfile
+          push: true
+          tags: |
+            falcon.rtf-alm.siemens.cloud/planetary-dev/log_analyser:${{ env.LOG_ANALYSER_VERSION }}
+
+      # Publish the energy_calculator image
+      - name: Extract energy_calculator version
+        run: echo "ENERGY_CALCULATOR_VERSION=$(python3 energy_calculator/setup.py --version)" >> $GITHUB_ENV
+
+      - name: Build and push Docker images
+        uses: actions/docker_build-push-action@v4.0.0
+        with:
+          context: ./energy_calculator
+          dockerfile: ./energy_calculator/Dockerfile
+          push: true
+          tags: |
+            falcon.rtf-alm.siemens.cloud/planetary-dev/energy_calculator:${{ env.ENERGY_CALCULATOR_VERSION }}

@@ -1,0 +1,39 @@
+name: Deloy Services to EKS
+
+on:
+  push:
+    branches: [ 'main' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to EKS
+    runs-on: [ Linux ]
+    container: alpine/k8s:1.24.12
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - name: Set up Kubeconfig
+        env:
+          KUBECONFIG_SECRET: ${{ secrets.KUBECONFIG }}
+        run: |
+          echo "$KUBECONFIG_SECRET" > kubeconfig.yaml
+          echo "KUBECONFIG=$(pwd)/kubeconfig.yaml" >> $GITHUB_ENV
+
+      - name: Deploy energy_calculator to kubernetes cluster
+        run: |
+          kubectl apply -f energy_calculator/deployment/deployment.yaml
+          kubectl apply -f energy_calculator/deployment/service.yaml
+          kubectl apply -f energy_calculator/deployment/ingress.yaml
+
+      - name: Deploy log_analyser to kubernetes cluster
+        run: |
+          kubectl apply -f log_analyser/deployment/deployment.yaml
+          
+        
+          
