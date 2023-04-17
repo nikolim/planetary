@@ -77,10 +77,11 @@ create table steps
 create table hosts
 (
     name        varchar(255) not null,
+    vsphere     varchar(255),
     cpu_model   varchar(255),
     cpu_cores   int,
     cpu_threads int,
-    memory      int,
+    memory      bigint,
     vendor      varchar(255),
     model       varchar(255),
     primary key (name)
