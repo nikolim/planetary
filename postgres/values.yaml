@@ -13,7 +13,7 @@ primary:
     storageClass: "encrypted-standard"
     accessModes:
       - ReadWriteOnce
-    existingClaim: "data-postgres-postgresql-0"
+    # existingClaim: "data-postgres-postgresql-0"
 
   initdb:
     scriptsConfigMap: postgres-init-scripts
