@@ -30,6 +30,10 @@ jobs:
           echo "$KUBECONFIG_SECRET" > kubeconfig.yaml
           echo "KUBECONFIG=$(pwd)/kubeconfig.yaml" >> $GITHUB_ENV
 
+      - name: Create configmap
+        run: |
+          kubectl apply -f config/config.yaml
+
       - name: Deploy energy_calculator to kubernetes cluster
         run: |
           kubectl apply -f energy_calculator/deployment/deployment.yaml

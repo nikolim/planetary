@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: planetary-config
+data:
+
+  # Log Analyser config
+  request_timeout: "10"
+  repo_scan_frequency: "3600"
+  run_scan_frequency: "300"
+  max_threads: "64"
+  github_base_url: "https://github.siemens.cloud"
+  azure_base_url: "https://sol.tfs.siemens.net"
+  azure_api_version: "5.1"
+
+  # API config
+  api_host: "0.0.0.0"
+  api_port: "8000"
+
+  # Frequency to write energy values back to the database
+  service_interval: "3600"
+
+  # Prom config (credentials are in the secret)
+  prometheus_host: "https://prometheus-heartbeat.dema-platform.siemens.cloud"
+  prometheus_port: "9090"
+
+  # Postgres config (credentials are in the secret)
+  postgres_host: "postgres-postgresql"
+  postgres_port: "5432"
+  postgres_database: "postgres"
