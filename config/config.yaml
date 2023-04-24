@@ -7,11 +7,11 @@ data:
   # Log Analyser config
   request_timeout: "10"
   repo_scan_frequency: "3600"
-  run_scan_frequency: "300"
+  run_scan_frequency: "3600"
   max_threads: "64"
-  github_base_url: "https://github.siemens.cloud"
-  azure_base_url: "https://sol.tfs.siemens.net"
-  azure_api_version: "5.1"
+
+  github_base_url: "{'siemens': 'https://github.siemens.cloud'}"
+  azure_base_urls: "{'sol': 'https://sol.tfs.siemens.net'}"
 
   # API config
   api_host: "0.0.0.0"

@@ -40,7 +40,7 @@ the cluster.
    ```
 4. Create secret for the services
    ```bash
-   kubectl create secret generic planetary-secrets --from-env-file=.secrets
+   kubectl create secret generic planetary-secrets --from-env-file=config/.secrets
    ```
 5. Adopt the ```config/config.yaml``` file to your needs
    ```bash
