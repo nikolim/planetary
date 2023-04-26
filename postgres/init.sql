@@ -1,12 +1,13 @@
 create table repositories
 (
-    id         varchar(255) unique not null,
-    name       varchar(255)        not null,
-    owner      varchar(255),
-    platform   varchar(255)        not null,
-    collection varchar(255),
-    project    varchar(255),
-    last_crawl timestamp,
+    id           varchar(255) unique not null,
+    name         varchar(255)        not null,
+    owner        varchar(255),
+    platform     varchar(255)        not null,
+    platform_tag varchar(255)        not null,
+    collection   varchar(255),
+    project      varchar(255),
+    last_crawl   timestamp,
     primary key (id)
 );
 
