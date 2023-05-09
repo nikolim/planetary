@@ -58,6 +58,7 @@ create table jobs
     runner     varchar(255)        not null,
     run_id     varchar(255),
     conclusion varchar(255),
+    energy     float,
     foreign key (runner) references runners (id),
     foreign key (run_id) references runs (id),
     primary key (id)

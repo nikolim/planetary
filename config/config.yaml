@@ -8,10 +8,10 @@ data:
   request_timeout: "10"
   repo_scan_frequency: "3600"
   run_scan_frequency: "3600"
-  max_threads: "64"
+  max_threads: "8"
 
   github_base_url: "{'siemens': 'https://github.siemens.cloud'}"
-  azure_base_urls: "{'sol': 'https://sol.tfs.siemens.net'}"
+  azure_base_urls: "{'sol': 'https://sol.tfs.siemens.net', 'jupiter': 'https://jupiter.tfs.siemens.net/tfs'}"
 
   # API config
   api_host: "0.0.0.0"
