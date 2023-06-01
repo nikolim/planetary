@@ -7,3 +7,6 @@
 [submodule "pollect"]
 	path = pollect
 	url = git@github.siemens.cloud:nikolai-limbrunner-ext/pollect.git
+[submodule "service_mapping"]
+	path = service_mapping
+	url = git@github.siemens.cloud:nikolai-limbrunner-ext/service_mapping.git

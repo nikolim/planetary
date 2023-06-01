@@ -28,3 +28,8 @@ data:
   postgres_host: "postgres-postgresql"
   postgres_port: "5432"
   postgres_database: "postgres"
+
+  # LDAP config (credentials are in the secret)
+  ldap_server: "ldap://ad001.siemens.net"
+  ldap_query: "OU=Servers,OU=_Central,OU=005,OU=RA011,DC=ad001,DC=siemens,DC=net"
+  ldap_scan_frequency: "3600"

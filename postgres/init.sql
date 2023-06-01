@@ -76,6 +76,7 @@ create table steps
     primary key (id)
 );
 
+-- used for inventory
 create table hosts
 (
     name        varchar(255) not null,
@@ -98,5 +99,27 @@ create table vms
     host_name        varchar(255),
     primary key (name),
     foreign key (host_name) references hosts (name)
+);
+
+-- tables for ldap mapping
+CREATE TABLE services
+(
+    service_name VARCHAR(255) PRIMARY KEY
+);
+
+CREATE TABLE subservices
+(
+    subservice_name VARCHAR(255) PRIMARY KEY,
+    service_name    VARCHAR(255),
+    FOREIGN KEY (service_name) REFERENCES services (service_name)
+);
+
+CREATE TABLE servers
+(
+    server_name     VARCHAR(255) PRIMARY KEY,
+    service_name    VARCHAR(255),
+    subservice_name VARCHAR(255),
+    FOREIGN KEY (service_name) REFERENCES services (service_name),
+    FOREIGN KEY (subservice_name) REFERENCES subservices (subservice_name)
 );
 
