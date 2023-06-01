@@ -67,3 +67,15 @@ jobs:
             "https_proxy=${{ env.http_proxy }}"
             "no_proxy=${{ env.no_proxy }}"
 
+      - name: Build and push service_mapping image
+        uses: actions/docker_build-push-action@v4.0.0
+        with:
+          context: ./service_mapping
+          file: ./service_mapping/Dockerfile
+          push: true
+          tags: |
+            falcon.rtf-alm.siemens.cloud/planetary-dev/service_mapping:0.1.0
+          build-args: |
+            "http_proxy=${{ env.http_proxy }}"
+            "https_proxy=${{ env.http_proxy }}"
+            "no_proxy=${{ env.no_proxy }}"

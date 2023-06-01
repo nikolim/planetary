@@ -43,3 +43,7 @@ jobs:
       - name: Deploy log_analyser to kubernetes cluster
         run: |
           kubectl apply -f log_analyser/deployment/deployment.yaml
+
+      - name: Deploy service_mapper to kubernetes cluster
+        run: |
+          kubectl apply -f service_mapping/deployment/deployment.yaml
